@@ -45,8 +45,7 @@ namespace BlackGuardDeobfuscator
                         {
                             if (b64Funcs.Contains((MethodDef)ins.Operand))
                             {
-                                //Console.WriteLine(prevIns.Operand.ToString());
-                                if (prevIns.Operand is string)
+                                if (prevIns.Operand is string && prevIns.OpCode == OpCodes.Ldstr)
                                 {
                                     try
                                     {
@@ -78,7 +77,7 @@ namespace BlackGuardDeobfuscator
                     continue;
                 foreach(var method in type.Methods)
                 {
-                    if (!method.HasBody || method.Body.Instructions.Count > 5)
+                    if (!method.HasBody )
                         continue;
                     foreach(var ins in method.Body.Instructions)
                     {
